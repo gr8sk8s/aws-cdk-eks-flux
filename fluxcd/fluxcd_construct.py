@@ -1,18 +1,20 @@
+import aws_cdk as core
+from constructs import Construct
+
 from aws_cdk import (
     aws_iam as iam,
     aws_sqs as sqs,
     aws_sns as sns,
     aws_sns_subscriptions as subs,
     aws_codecommit as codecommit,
-    aws_eks as eks,
-    core
+    aws_eks as eks
 )
 from . import fluxcd_cluster
-class FluxcdConstruct(core.Construct):
+class FluxcdConstruct(Construct):
 
     def __init__(
         self, 
-        scope: core.Construct, 
+        scope: Construct, 
         id: str, 
         eks_base_cluster: eks.Cluster,
         git_user,

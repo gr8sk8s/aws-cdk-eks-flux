@@ -1,19 +1,21 @@
+import aws_cdk as core
+from constructs import Construct
+
 from aws_cdk import (
     aws_codecommit as codecommit,
     aws_codepipeline as codepipeline,
     aws_codebuild as codebuild,
     aws_codepipeline_actions as codepipeline_actions,
     aws_ecr as ecr,
-    aws_iam as iam,
-    core
+    aws_iam as iam
 )    
 
 
-class DockerPipelineConstruct(core.Construct):
+class DockerPipelineConstruct(Construct):
 
     def __init__(
         self, 
-        scope: core.Construct, 
+        scope: Construct, 
         id: str,
     ) -> None:
         super().__init__(scope=scope, id=id)

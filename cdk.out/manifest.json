@@ -1,0 +1,646 @@
+{
+  "version": "20.0.0",
+  "artifacts": {
+    "Tree": {
+      "type": "cdk:tree",
+      "properties": {
+        "file": "tree.json"
+      }
+    },
+    "awsome-flux-example-stack.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "awsome-flux-example-stack.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "awsome-flux-example-stack": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://unknown-account/us-east-2",
+      "properties": {
+        "templateFile": "awsome-flux-example-stack.template.json",
+        "validateOnSynth": false,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-us-east-2",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-us-east-2",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-us-east-2/528382062441967064f79a0c2355a89294265b07ed67b3289a983b14e51d6c19.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "awsome-flux-example-stack.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-lookup-role-${AWS::AccountId}-us-east-2",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        }
+      },
+      "dependencies": [
+        "awsome-flux-example-stack.assets"
+      ],
+      "metadata": {
+        "/awsome-flux-example-stack/awsome-flux-example-cluster/awsome-flux-example-cluster/DefaultVpc/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsomefluxexampleclusterDefaultVpc43FF4778"
+          }
+        ],
+        "/awsome-flux-example-stack/awsome-flux-example-cluster/awsome-flux-example-cluster/DefaultVpc/PublicSubnet1/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsomefluxexampleclusterDefaultVpcPublicSubnet1SubnetCDE5083C"
+          }
+        ],
+        "/awsome-flux-example-stack/awsome-flux-example-cluster/awsome-flux-example-cluster/DefaultVpc/PublicSubnet1/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsomefluxexampleclusterDefaultVpcPublicSubnet1RouteTableBAEEEA8E"
+          }
+        ],
+        "/awsome-flux-example-stack/awsome-flux-example-cluster/awsome-flux-example-cluster/DefaultVpc/PublicSubnet1/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsomefluxexampleclusterDefaultVpcPublicSubnet1RouteTableAssociation7DA9C3ED"
+          }
+        ],
+        "/awsome-flux-example-stack/awsome-flux-example-cluster/awsome-flux-example-cluster/DefaultVpc/PublicSubnet1/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsomefluxexampleclusterDefaultVpcPublicSubnet1DefaultRoute4ECBCFC2"
+          }
+        ],
+        "/awsome-flux-example-stack/awsome-flux-example-cluster/awsome-flux-example-cluster/DefaultVpc/PublicSubnet1/EIP": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsomefluxexampleclusterDefaultVpcPublicSubnet1EIP40F64B69"
+          }
+        ],
+        "/awsome-flux-example-stack/awsome-flux-example-cluster/awsome-flux-example-cluster/DefaultVpc/PublicSubnet1/NATGateway": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsomefluxexampleclusterDefaultVpcPublicSubnet1NATGateway7E421EBF"
+          }
+        ],
+        "/awsome-flux-example-stack/awsome-flux-example-cluster/awsome-flux-example-cluster/DefaultVpc/PublicSubnet2/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsomefluxexampleclusterDefaultVpcPublicSubnet2SubnetDE991E42"
+          }
+        ],
+        "/awsome-flux-example-stack/awsome-flux-example-cluster/awsome-flux-example-cluster/DefaultVpc/PublicSubnet2/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsomefluxexampleclusterDefaultVpcPublicSubnet2RouteTable3F4234C7"
+          }
+        ],
+        "/awsome-flux-example-stack/awsome-flux-example-cluster/awsome-flux-example-cluster/DefaultVpc/PublicSubnet2/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsomefluxexampleclusterDefaultVpcPublicSubnet2RouteTableAssociation49D14DAD"
+          }
+        ],
+        "/awsome-flux-example-stack/awsome-flux-example-cluster/awsome-flux-example-cluster/DefaultVpc/PublicSubnet2/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsomefluxexampleclusterDefaultVpcPublicSubnet2DefaultRouteF3CE632B"
+          }
+        ],
+        "/awsome-flux-example-stack/awsome-flux-example-cluster/awsome-flux-example-cluster/DefaultVpc/PublicSubnet2/EIP": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsomefluxexampleclusterDefaultVpcPublicSubnet2EIP462B5F68"
+          }
+        ],
+        "/awsome-flux-example-stack/awsome-flux-example-cluster/awsome-flux-example-cluster/DefaultVpc/PublicSubnet2/NATGateway": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsomefluxexampleclusterDefaultVpcPublicSubnet2NATGateway6A5FB87F"
+          }
+        ],
+        "/awsome-flux-example-stack/awsome-flux-example-cluster/awsome-flux-example-cluster/DefaultVpc/PrivateSubnet1/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsomefluxexampleclusterDefaultVpcPrivateSubnet1Subnet46881CD1"
+          }
+        ],
+        "/awsome-flux-example-stack/awsome-flux-example-cluster/awsome-flux-example-cluster/DefaultVpc/PrivateSubnet1/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsomefluxexampleclusterDefaultVpcPrivateSubnet1RouteTable6B5D326E"
+          }
+        ],
+        "/awsome-flux-example-stack/awsome-flux-example-cluster/awsome-flux-example-cluster/DefaultVpc/PrivateSubnet1/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsomefluxexampleclusterDefaultVpcPrivateSubnet1RouteTableAssociation07BA9A57"
+          }
+        ],
+        "/awsome-flux-example-stack/awsome-flux-example-cluster/awsome-flux-example-cluster/DefaultVpc/PrivateSubnet1/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsomefluxexampleclusterDefaultVpcPrivateSubnet1DefaultRouteB73E48B1"
+          }
+        ],
+        "/awsome-flux-example-stack/awsome-flux-example-cluster/awsome-flux-example-cluster/DefaultVpc/PrivateSubnet2/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsomefluxexampleclusterDefaultVpcPrivateSubnet2SubnetDC32EE9D"
+          }
+        ],
+        "/awsome-flux-example-stack/awsome-flux-example-cluster/awsome-flux-example-cluster/DefaultVpc/PrivateSubnet2/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsomefluxexampleclusterDefaultVpcPrivateSubnet2RouteTable98481863"
+          }
+        ],
+        "/awsome-flux-example-stack/awsome-flux-example-cluster/awsome-flux-example-cluster/DefaultVpc/PrivateSubnet2/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsomefluxexampleclusterDefaultVpcPrivateSubnet2RouteTableAssociationF3141643"
+          }
+        ],
+        "/awsome-flux-example-stack/awsome-flux-example-cluster/awsome-flux-example-cluster/DefaultVpc/PrivateSubnet2/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsomefluxexampleclusterDefaultVpcPrivateSubnet2DefaultRouteE25AB025"
+          }
+        ],
+        "/awsome-flux-example-stack/awsome-flux-example-cluster/awsome-flux-example-cluster/DefaultVpc/IGW": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsomefluxexampleclusterDefaultVpcIGW9BF343A5"
+          }
+        ],
+        "/awsome-flux-example-stack/awsome-flux-example-cluster/awsome-flux-example-cluster/DefaultVpc/VPCGW": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsomefluxexampleclusterDefaultVpcVPCGW38476BB4"
+          }
+        ],
+        "/awsome-flux-example-stack/awsome-flux-example-cluster/awsome-flux-example-cluster/Role/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsomefluxexampleclusterRole0311CD39"
+          }
+        ],
+        "/awsome-flux-example-stack/awsome-flux-example-cluster/awsome-flux-example-cluster/ControlPlaneSecurityGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsomefluxexampleclusterControlPlaneSecurityGroupD2CA5DD5"
+          }
+        ],
+        "/awsome-flux-example-stack/awsome-flux-example-cluster/awsome-flux-example-cluster/Resource/CreationRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsomefluxexampleclusterCreationRoleEEC56F7E"
+          }
+        ],
+        "/awsome-flux-example-stack/awsome-flux-example-cluster/awsome-flux-example-cluster/Resource/CreationRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsomefluxexampleclusterCreationRoleDefaultPolicyB89F9AA5"
+          }
+        ],
+        "/awsome-flux-example-stack/awsome-flux-example-cluster/awsome-flux-example-cluster/Resource/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsomefluxexamplecluster7E1AB52B"
+          }
+        ],
+        "/awsome-flux-example-stack/awsome-flux-example-cluster/awsome-flux-example-cluster/KubectlReadyBarrier": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsomefluxexampleclusterKubectlReadyBarrier0DA318A6"
+          }
+        ],
+        "/awsome-flux-example-stack/awsome-flux-example-cluster/awsome-flux-example-cluster/MastersRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsomefluxexampleclusterMastersRole1B1D2CE8"
+          }
+        ],
+        "/awsome-flux-example-stack/awsome-flux-example-cluster/awsome-flux-example-cluster/AwsAuth/manifest/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsomefluxexampleclusterAwsAuthmanifest90DD86E9"
+          }
+        ],
+        "/awsome-flux-example-stack/awsome-flux-example-cluster/awsome-flux-example-cluster/NodegroupDefaultCapacity/NodeGroupRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsomefluxexampleclusterNodegroupDefaultCapacityNodeGroupRoleAED8FCFE"
+          }
+        ],
+        "/awsome-flux-example-stack/awsome-flux-example-cluster/awsome-flux-example-cluster/NodegroupDefaultCapacity/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsomefluxexampleclusterNodegroupDefaultCapacity38FC71E9"
+          }
+        ],
+        "/awsome-flux-example-stack/awsome-flux-example-cluster/awsome-flux-example-cluster/ConfigCommand": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsomefluxexampleclusterConfigCommandC5ACCB2F"
+          }
+        ],
+        "/awsome-flux-example-stack/awsome-flux-example-cluster/awsome-flux-example-cluster/GetTokenCommand": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsomefluxexampleclusterGetTokenCommand58A55459"
+          }
+        ],
+        "/awsome-flux-example-stack/@aws-cdk--aws-eks.ClusterResourceProvider/NodeProxyAgentLayer/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NodeProxyAgentLayer924C1971"
+          }
+        ],
+        "/awsome-flux-example-stack/@aws-cdk--aws-eks.ClusterResourceProvider/OnEventHandler/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "OnEventHandlerServiceRole15A26729"
+          }
+        ],
+        "/awsome-flux-example-stack/@aws-cdk--aws-eks.ClusterResourceProvider/OnEventHandler/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "OnEventHandlerServiceRoleDefaultPolicyC57085D4"
+          }
+        ],
+        "/awsome-flux-example-stack/@aws-cdk--aws-eks.ClusterResourceProvider/OnEventHandler/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "OnEventHandler42BEBAE0"
+          }
+        ],
+        "/awsome-flux-example-stack/@aws-cdk--aws-eks.ClusterResourceProvider/IsCompleteHandler/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "IsCompleteHandlerServiceRole5810CC58"
+          }
+        ],
+        "/awsome-flux-example-stack/@aws-cdk--aws-eks.ClusterResourceProvider/IsCompleteHandler/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "IsCompleteHandlerServiceRoleDefaultPolicy8F64197B"
+          }
+        ],
+        "/awsome-flux-example-stack/@aws-cdk--aws-eks.ClusterResourceProvider/IsCompleteHandler/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "IsCompleteHandler7073F4DA"
+          }
+        ],
+        "/awsome-flux-example-stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onEvent/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProviderframeworkonEventServiceRole9FF04296"
+          }
+        ],
+        "/awsome-flux-example-stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onEvent/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProviderframeworkonEventServiceRoleDefaultPolicy48CD2133"
+          }
+        ],
+        "/awsome-flux-example-stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onEvent/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProviderframeworkonEvent83C1D0A7"
+          }
+        ],
+        "/awsome-flux-example-stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-isComplete/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProviderframeworkisCompleteServiceRoleB1087139"
+          }
+        ],
+        "/awsome-flux-example-stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-isComplete/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProviderframeworkisCompleteServiceRoleDefaultPolicy2E7140AC"
+          }
+        ],
+        "/awsome-flux-example-stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-isComplete/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProviderframeworkisComplete26D7B0CB"
+          }
+        ],
+        "/awsome-flux-example-stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onTimeout/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProviderframeworkonTimeoutServiceRole28643D26"
+          }
+        ],
+        "/awsome-flux-example-stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onTimeout/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProviderframeworkonTimeoutServiceRoleDefaultPolicy2688969F"
+          }
+        ],
+        "/awsome-flux-example-stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onTimeout/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProviderframeworkonTimeout0B47CA38"
+          }
+        ],
+        "/awsome-flux-example-stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/waiter-state-machine/Role/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProviderwaiterstatemachineRole0C7159F9"
+          }
+        ],
+        "/awsome-flux-example-stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/waiter-state-machine/Role/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProviderwaiterstatemachineRoleDefaultPolicyD3C3DA1A"
+          }
+        ],
+        "/awsome-flux-example-stack/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/waiter-state-machine/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "Providerwaiterstatemachine5D4A9DF0"
+          }
+        ],
+        "/awsome-flux-example-stack/@aws-cdk--aws-eks.ClusterResourceProvider/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/awsome-flux-example-stack/@aws-cdk--aws-eks.ClusterResourceProvider/awsomefluxexamplestackawscdkawseksClusterResourceProviderframeworkonEvent7899144BArn": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsomefluxexamplestackawscdkawseksClusterResourceProviderframeworkonEvent7899144BArn"
+          }
+        ],
+        "/awsome-flux-example-stack/@aws-cdk--aws-eks.ClusterResourceProvider/reference-to-awsomefluxexamplestackawsomefluxexampleclusterCreationRole588EF267Arn": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoawsomefluxexamplestackawsomefluxexampleclusterCreationRole588EF267Arn"
+          }
+        ],
+        "/awsome-flux-example-stack/@aws-cdk--aws-eks.ClusterResourceProvider.NestedStack/@aws-cdk--aws-eks.ClusterResourceProvider.NestedStackResource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awscdkawseksClusterResourceProviderNestedStackawscdkawseksClusterResourceProviderNestedStackResource9827C454"
+          }
+        ],
+        "/awsome-flux-example-stack/@aws-cdk--aws-eks.KubectlProvider/Handler/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "HandlerServiceRoleFCDC14AE"
+          }
+        ],
+        "/awsome-flux-example-stack/@aws-cdk--aws-eks.KubectlProvider/Handler/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "HandlerServiceRoleDefaultPolicyCBD0CC91"
+          }
+        ],
+        "/awsome-flux-example-stack/@aws-cdk--aws-eks.KubectlProvider/Handler/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "Handler886CB40B"
+          }
+        ],
+        "/awsome-flux-example-stack/@aws-cdk--aws-eks.KubectlProvider/AwsCliLayer/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AwsCliLayerF44AAF94"
+          }
+        ],
+        "/awsome-flux-example-stack/@aws-cdk--aws-eks.KubectlProvider/KubectlLayer/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "KubectlLayer600207B5"
+          }
+        ],
+        "/awsome-flux-example-stack/@aws-cdk--aws-eks.KubectlProvider/Provider/framework-onEvent/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProviderframeworkonEventServiceRole9FF04296"
+          }
+        ],
+        "/awsome-flux-example-stack/@aws-cdk--aws-eks.KubectlProvider/Provider/framework-onEvent/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProviderframeworkonEventServiceRoleDefaultPolicy48CD2133"
+          }
+        ],
+        "/awsome-flux-example-stack/@aws-cdk--aws-eks.KubectlProvider/Provider/framework-onEvent/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProviderframeworkonEvent83C1D0A7"
+          }
+        ],
+        "/awsome-flux-example-stack/@aws-cdk--aws-eks.KubectlProvider/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/awsome-flux-example-stack/@aws-cdk--aws-eks.KubectlProvider/awsomefluxexamplestackawscdkawseksKubectlProviderframeworkonEvent60B0EC45Arn": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsomefluxexamplestackawscdkawseksKubectlProviderframeworkonEvent60B0EC45Arn"
+          }
+        ],
+        "/awsome-flux-example-stack/@aws-cdk--aws-eks.KubectlProvider/reference-to-awsomefluxexamplestackawsomefluxexamplecluster301EAC35Arn": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoawsomefluxexamplestackawsomefluxexamplecluster301EAC35Arn"
+          }
+        ],
+        "/awsome-flux-example-stack/@aws-cdk--aws-eks.KubectlProvider/reference-to-awsomefluxexamplestackawsomefluxexampleclusterCreationRole588EF267Arn": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoawsomefluxexamplestackawsomefluxexampleclusterCreationRole588EF267Arn"
+          }
+        ],
+        "/awsome-flux-example-stack/@aws-cdk--aws-eks.KubectlProvider/reference-to-awsomefluxexamplestackawsomefluxexampleclusterDefaultVpcPrivateSubnet1Subnet458EC5B5Ref": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoawsomefluxexamplestackawsomefluxexampleclusterDefaultVpcPrivateSubnet1Subnet458EC5B5Ref"
+          }
+        ],
+        "/awsome-flux-example-stack/@aws-cdk--aws-eks.KubectlProvider/reference-to-awsomefluxexamplestackawsomefluxexampleclusterDefaultVpcPrivateSubnet2Subnet74AFF6E0Ref": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoawsomefluxexamplestackawsomefluxexampleclusterDefaultVpcPrivateSubnet2Subnet74AFF6E0Ref"
+          }
+        ],
+        "/awsome-flux-example-stack/@aws-cdk--aws-eks.KubectlProvider/reference-to-awsomefluxexamplestackawsomefluxexamplecluster301EAC35ClusterSecurityGroupId": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoawsomefluxexamplestackawsomefluxexamplecluster301EAC35ClusterSecurityGroupId"
+          }
+        ],
+        "/awsome-flux-example-stack/@aws-cdk--aws-eks.KubectlProvider.NestedStack/@aws-cdk--aws-eks.KubectlProvider.NestedStackResource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B"
+          }
+        ],
+        "/awsome-flux-example-stack/awsome-flux-example-docker-pipeline/awsome-flux-example-container/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsomefluxexampledockerpipelineawsomefluxexamplecontainer23E06EAE"
+          }
+        ],
+        "/awsome-flux-example-stack/awsome-flux-example-docker-pipeline/awsome-flux-example-container-git/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsomefluxexampledockerpipelineawsomefluxexamplecontainergitBF92E00C"
+          }
+        ],
+        "/awsome-flux-example-stack/awsome-flux-example-docker-pipeline/awsome-flux-example-container-git/awsomefluxexamplestackawsomefluxexampledockerpipelineawsomefluxexamplecontainerpipeline75CF0A7DEventRule/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsomefluxexampledockerpipelineawsomefluxexamplecontainergitawsomefluxexamplestackawsomefluxexampledockerpipelineawsomefluxexamplecontainerpipeline75CF0A7DEventRule4804C4A5"
+          }
+        ],
+        "/awsome-flux-example-stack/awsome-flux-example-docker-pipeline/awsome-flux-example-container--pipeline/ArtifactsBucketEncryptionKey/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsomefluxexampledockerpipelineawsomefluxexamplecontainerpipelineArtifactsBucketEncryptionKey9F6896D1"
+          }
+        ],
+        "/awsome-flux-example-stack/awsome-flux-example-docker-pipeline/awsome-flux-example-container--pipeline/ArtifactsBucketEncryptionKeyAlias/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsomefluxexampledockerpipelineawsomefluxexamplecontainerpipelineArtifactsBucketEncryptionKeyAliasCA25191F"
+          }
+        ],
+        "/awsome-flux-example-stack/awsome-flux-example-docker-pipeline/awsome-flux-example-container--pipeline/ArtifactsBucket/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsomefluxexampledockerpipelineawsomefluxexamplecontainerpipelineArtifactsBucket21F8A813"
+          }
+        ],
+        "/awsome-flux-example-stack/awsome-flux-example-docker-pipeline/awsome-flux-example-container--pipeline/ArtifactsBucket/Policy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsomefluxexampledockerpipelineawsomefluxexamplecontainerpipelineArtifactsBucketPolicy08E57BF3"
+          }
+        ],
+        "/awsome-flux-example-stack/awsome-flux-example-docker-pipeline/awsome-flux-example-container--pipeline/Role/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsomefluxexampledockerpipelineawsomefluxexamplecontainerpipelineRoleC69ED2CB"
+          }
+        ],
+        "/awsome-flux-example-stack/awsome-flux-example-docker-pipeline/awsome-flux-example-container--pipeline/Role/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsomefluxexampledockerpipelineawsomefluxexamplecontainerpipelineRoleDefaultPolicyC2FF4E06"
+          }
+        ],
+        "/awsome-flux-example-stack/awsome-flux-example-docker-pipeline/awsome-flux-example-container--pipeline/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsomefluxexampledockerpipelineawsomefluxexamplecontainerpipelineEBF581BB"
+          }
+        ],
+        "/awsome-flux-example-stack/awsome-flux-example-docker-pipeline/awsome-flux-example-container--pipeline/Source/CodeCommit_Source/CodePipelineActionRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsomefluxexampledockerpipelineawsomefluxexamplecontainerpipelineSourceCodeCommitSourceCodePipelineActionRole05C7183F"
+          }
+        ],
+        "/awsome-flux-example-stack/awsome-flux-example-docker-pipeline/awsome-flux-example-container--pipeline/Source/CodeCommit_Source/CodePipelineActionRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsomefluxexampledockerpipelineawsomefluxexamplecontainerpipelineSourceCodeCommitSourceCodePipelineActionRoleDefaultPolicy58010713"
+          }
+        ],
+        "/awsome-flux-example-stack/awsome-flux-example-docker-pipeline/awsome-flux-example-container--pipeline/EventsRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsomefluxexampledockerpipelineawsomefluxexamplecontainerpipelineEventsRole39A4E862"
+          }
+        ],
+        "/awsome-flux-example-stack/awsome-flux-example-docker-pipeline/awsome-flux-example-container--pipeline/EventsRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsomefluxexampledockerpipelineawsomefluxexamplecontainerpipelineEventsRoleDefaultPolicy7F937C00"
+          }
+        ],
+        "/awsome-flux-example-stack/awsome-flux-example-docker-pipeline/awsome-flux-example-container--pipeline/DockerBuild/DockerBuild_and_Push_ECR/CodePipelineActionRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsomefluxexampledockerpipelineawsomefluxexamplecontainerpipelineDockerBuildDockerBuildandPushECRCodePipelineActionRoleC7E95C6B"
+          }
+        ],
+        "/awsome-flux-example-stack/awsome-flux-example-docker-pipeline/awsome-flux-example-container--pipeline/DockerBuild/DockerBuild_and_Push_ECR/CodePipelineActionRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsomefluxexampledockerpipelineawsomefluxexamplecontainerpipelineDockerBuildDockerBuildandPushECRCodePipelineActionRoleDefaultPolicy1455A1A5"
+          }
+        ],
+        "/awsome-flux-example-stack/awsome-flux-example-docker-pipeline/application_repository": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsomefluxexampledockerpipelineapplicationrepositoryF0BB24A0"
+          }
+        ],
+        "/awsome-flux-example-stack/awsome-flux-example-docker-pipeline/DockerBuild/Role/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsomefluxexampledockerpipelineDockerBuildRole5EFB7C4B"
+          }
+        ],
+        "/awsome-flux-example-stack/awsome-flux-example-docker-pipeline/DockerBuild/Role/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsomefluxexampledockerpipelineDockerBuildRoleDefaultPolicy9CCBA0AA"
+          }
+        ],
+        "/awsome-flux-example-stack/awsome-flux-example-docker-pipeline/DockerBuild/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsomefluxexampledockerpipelineDockerBuild45518260"
+          }
+        ],
+        "/awsome-flux-example-stack/awsome-flux-example-fluxcd/awsome-flux-example-kubernetes-git/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsomefluxexamplefluxcdawsomefluxexamplekubernetesgit42081479"
+          }
+        ],
+        "/awsome-flux-example-stack/awsome-flux-example-fluxcd/k8s_infrastructure_repository": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsomefluxexamplefluxcdk8sinfrastructurerepository051BF5A3"
+          }
+        ],
+        "/awsome-flux-example-stack/awsome-flux-example-fluxcd/fluxcd-main-manifest-new/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsomefluxexamplefluxcdfluxcdmainmanifestnew79848BE6"
+          }
+        ],
+        "/awsome-flux-example-stack/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/awsome-flux-example-stack/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/awsome-flux-example-stack/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "awsome-flux-example-stack"
+    }
+  }
+}

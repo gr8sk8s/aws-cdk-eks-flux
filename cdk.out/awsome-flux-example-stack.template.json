@@ -1,0 +1,2283 @@
+{
+ "Resources": {
+  "awsomefluxexampleclusterDefaultVpc43FF4778": {
+   "Type": "AWS::EC2::VPC",
+   "Properties": {
+    "CidrBlock": "10.0.0.0/16",
+    "EnableDnsHostnames": true,
+    "EnableDnsSupport": true,
+    "InstanceTenancy": "default",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "awsome-flux-example-stack/awsome-flux-example-cluster/awsome-flux-example-cluster/DefaultVpc"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "awsome-flux-example-stack/awsome-flux-example-cluster/awsome-flux-example-cluster/DefaultVpc/Resource"
+   }
+  },
+  "awsomefluxexampleclusterDefaultVpcPublicSubnet1SubnetCDE5083C": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "VpcId": {
+     "Ref": "awsomefluxexampleclusterDefaultVpc43FF4778"
+    },
+    "AvailabilityZone": {
+     "Fn::Select": [
+      0,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.0.0/18",
+    "MapPublicIpOnLaunch": true,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Public"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Public"
+     },
+     {
+      "Key": "kubernetes.io/role/elb",
+      "Value": "1"
+     },
+     {
+      "Key": "Name",
+      "Value": "awsome-flux-example-stack/awsome-flux-example-cluster/awsome-flux-example-cluster/DefaultVpc/PublicSubnet1"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "awsome-flux-example-stack/awsome-flux-example-cluster/awsome-flux-example-cluster/DefaultVpc/PublicSubnet1/Subnet"
+   }
+  },
+  "awsomefluxexampleclusterDefaultVpcPublicSubnet1RouteTableBAEEEA8E": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "VpcId": {
+     "Ref": "awsomefluxexampleclusterDefaultVpc43FF4778"
+    },
+    "Tags": [
+     {
+      "Key": "kubernetes.io/role/elb",
+      "Value": "1"
+     },
+     {
+      "Key": "Name",
+      "Value": "awsome-flux-example-stack/awsome-flux-example-cluster/awsome-flux-example-cluster/DefaultVpc/PublicSubnet1"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "awsome-flux-example-stack/awsome-flux-example-cluster/awsome-flux-example-cluster/DefaultVpc/PublicSubnet1/RouteTable"
+   }
+  },
+  "awsomefluxexampleclusterDefaultVpcPublicSubnet1RouteTableAssociation7DA9C3ED": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "awsomefluxexampleclusterDefaultVpcPublicSubnet1RouteTableBAEEEA8E"
+    },
+    "SubnetId": {
+     "Ref": "awsomefluxexampleclusterDefaultVpcPublicSubnet1SubnetCDE5083C"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "awsome-flux-example-stack/awsome-flux-example-cluster/awsome-flux-example-cluster/DefaultVpc/PublicSubnet1/RouteTableAssociation"
+   }
+  },
+  "awsomefluxexampleclusterDefaultVpcPublicSubnet1DefaultRoute4ECBCFC2": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "awsomefluxexampleclusterDefaultVpcPublicSubnet1RouteTableBAEEEA8E"
+    },
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "GatewayId": {
+     "Ref": "awsomefluxexampleclusterDefaultVpcIGW9BF343A5"
+    }
+   },
+   "DependsOn": [
+    "awsomefluxexampleclusterDefaultVpcVPCGW38476BB4"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "awsome-flux-example-stack/awsome-flux-example-cluster/awsome-flux-example-cluster/DefaultVpc/PublicSubnet1/DefaultRoute"
+   }
+  },
+  "awsomefluxexampleclusterDefaultVpcPublicSubnet1EIP40F64B69": {
+   "Type": "AWS::EC2::EIP",
+   "Properties": {
+    "Domain": "vpc",
+    "Tags": [
+     {
+      "Key": "kubernetes.io/role/elb",
+      "Value": "1"
+     },
+     {
+      "Key": "Name",
+      "Value": "awsome-flux-example-stack/awsome-flux-example-cluster/awsome-flux-example-cluster/DefaultVpc/PublicSubnet1"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "awsome-flux-example-stack/awsome-flux-example-cluster/awsome-flux-example-cluster/DefaultVpc/PublicSubnet1/EIP"
+   }
+  },
+  "awsomefluxexampleclusterDefaultVpcPublicSubnet1NATGateway7E421EBF": {
+   "Type": "AWS::EC2::NatGateway",
+   "Properties": {
+    "SubnetId": {
+     "Ref": "awsomefluxexampleclusterDefaultVpcPublicSubnet1SubnetCDE5083C"
+    },
+    "AllocationId": {
+     "Fn::GetAtt": [
+      "awsomefluxexampleclusterDefaultVpcPublicSubnet1EIP40F64B69",
+      "AllocationId"
+     ]
+    },
+    "Tags": [
+     {
+      "Key": "kubernetes.io/role/elb",
+      "Value": "1"
+     },
+     {
+      "Key": "Name",
+      "Value": "awsome-flux-example-stack/awsome-flux-example-cluster/awsome-flux-example-cluster/DefaultVpc/PublicSubnet1"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "awsome-flux-example-stack/awsome-flux-example-cluster/awsome-flux-example-cluster/DefaultVpc/PublicSubnet1/NATGateway"
+   }
+  },
+  "awsomefluxexampleclusterDefaultVpcPublicSubnet2SubnetDE991E42": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "VpcId": {
+     "Ref": "awsomefluxexampleclusterDefaultVpc43FF4778"
+    },
+    "AvailabilityZone": {
+     "Fn::Select": [
+      1,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.64.0/18",
+    "MapPublicIpOnLaunch": true,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Public"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Public"
+     },
+     {
+      "Key": "kubernetes.io/role/elb",
+      "Value": "1"
+     },
+     {
+      "Key": "Name",
+      "Value": "awsome-flux-example-stack/awsome-flux-example-cluster/awsome-flux-example-cluster/DefaultVpc/PublicSubnet2"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "awsome-flux-example-stack/awsome-flux-example-cluster/awsome-flux-example-cluster/DefaultVpc/PublicSubnet2/Subnet"
+   }
+  },
+  "awsomefluxexampleclusterDefaultVpcPublicSubnet2RouteTable3F4234C7": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "VpcId": {
+     "Ref": "awsomefluxexampleclusterDefaultVpc43FF4778"
+    },
+    "Tags": [
+     {
+      "Key": "kubernetes.io/role/elb",
+      "Value": "1"
+     },
+     {
+      "Key": "Name",
+      "Value": "awsome-flux-example-stack/awsome-flux-example-cluster/awsome-flux-example-cluster/DefaultVpc/PublicSubnet2"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "awsome-flux-example-stack/awsome-flux-example-cluster/awsome-flux-example-cluster/DefaultVpc/PublicSubnet2/RouteTable"
+   }
+  },
+  "awsomefluxexampleclusterDefaultVpcPublicSubnet2RouteTableAssociation49D14DAD": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "awsomefluxexampleclusterDefaultVpcPublicSubnet2RouteTable3F4234C7"
+    },
+    "SubnetId": {
+     "Ref": "awsomefluxexampleclusterDefaultVpcPublicSubnet2SubnetDE991E42"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "awsome-flux-example-stack/awsome-flux-example-cluster/awsome-flux-example-cluster/DefaultVpc/PublicSubnet2/RouteTableAssociation"
+   }
+  },
+  "awsomefluxexampleclusterDefaultVpcPublicSubnet2DefaultRouteF3CE632B": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "awsomefluxexampleclusterDefaultVpcPublicSubnet2RouteTable3F4234C7"
+    },
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "GatewayId": {
+     "Ref": "awsomefluxexampleclusterDefaultVpcIGW9BF343A5"
+    }
+   },
+   "DependsOn": [
+    "awsomefluxexampleclusterDefaultVpcVPCGW38476BB4"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "awsome-flux-example-stack/awsome-flux-example-cluster/awsome-flux-example-cluster/DefaultVpc/PublicSubnet2/DefaultRoute"
+   }
+  },
+  "awsomefluxexampleclusterDefaultVpcPublicSubnet2EIP462B5F68": {
+   "Type": "AWS::EC2::EIP",
+   "Properties": {
+    "Domain": "vpc",
+    "Tags": [
+     {
+      "Key": "kubernetes.io/role/elb",
+      "Value": "1"
+     },
+     {
+      "Key": "Name",
+      "Value": "awsome-flux-example-stack/awsome-flux-example-cluster/awsome-flux-example-cluster/DefaultVpc/PublicSubnet2"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "awsome-flux-example-stack/awsome-flux-example-cluster/awsome-flux-example-cluster/DefaultVpc/PublicSubnet2/EIP"
+   }
+  },
+  "awsomefluxexampleclusterDefaultVpcPublicSubnet2NATGateway6A5FB87F": {
+   "Type": "AWS::EC2::NatGateway",
+   "Properties": {
+    "SubnetId": {
+     "Ref": "awsomefluxexampleclusterDefaultVpcPublicSubnet2SubnetDE991E42"
+    },
+    "AllocationId": {
+     "Fn::GetAtt": [
+      "awsomefluxexampleclusterDefaultVpcPublicSubnet2EIP462B5F68",
+      "AllocationId"
+     ]
+    },
+    "Tags": [
+     {
+      "Key": "kubernetes.io/role/elb",
+      "Value": "1"
+     },
+     {
+      "Key": "Name",
+      "Value": "awsome-flux-example-stack/awsome-flux-example-cluster/awsome-flux-example-cluster/DefaultVpc/PublicSubnet2"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "awsome-flux-example-stack/awsome-flux-example-cluster/awsome-flux-example-cluster/DefaultVpc/PublicSubnet2/NATGateway"
+   }
+  },
+  "awsomefluxexampleclusterDefaultVpcPrivateSubnet1Subnet46881CD1": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "VpcId": {
+     "Ref": "awsomefluxexampleclusterDefaultVpc43FF4778"
+    },
+    "AvailabilityZone": {
+     "Fn::Select": [
+      0,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.128.0/18",
+    "MapPublicIpOnLaunch": false,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Private"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Private"
+     },
+     {
+      "Key": "kubernetes.io/role/internal-elb",
+      "Value": "1"
+     },
+     {
+      "Key": "Name",
+      "Value": "awsome-flux-example-stack/awsome-flux-example-cluster/awsome-flux-example-cluster/DefaultVpc/PrivateSubnet1"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "awsome-flux-example-stack/awsome-flux-example-cluster/awsome-flux-example-cluster/DefaultVpc/PrivateSubnet1/Subnet"
+   }
+  },
+  "awsomefluxexampleclusterDefaultVpcPrivateSubnet1RouteTable6B5D326E": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "VpcId": {
+     "Ref": "awsomefluxexampleclusterDefaultVpc43FF4778"
+    },
+    "Tags": [
+     {
+      "Key": "kubernetes.io/role/internal-elb",
+      "Value": "1"
+     },
+     {
+      "Key": "Name",
+      "Value": "awsome-flux-example-stack/awsome-flux-example-cluster/awsome-flux-example-cluster/DefaultVpc/PrivateSubnet1"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "awsome-flux-example-stack/awsome-flux-example-cluster/awsome-flux-example-cluster/DefaultVpc/PrivateSubnet1/RouteTable"
+   }
+  },
+  "awsomefluxexampleclusterDefaultVpcPrivateSubnet1RouteTableAssociation07BA9A57": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "awsomefluxexampleclusterDefaultVpcPrivateSubnet1RouteTable6B5D326E"
+    },
+    "SubnetId": {
+     "Ref": "awsomefluxexampleclusterDefaultVpcPrivateSubnet1Subnet46881CD1"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "awsome-flux-example-stack/awsome-flux-example-cluster/awsome-flux-example-cluster/DefaultVpc/PrivateSubnet1/RouteTableAssociation"
+   }
+  },
+  "awsomefluxexampleclusterDefaultVpcPrivateSubnet1DefaultRouteB73E48B1": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "awsomefluxexampleclusterDefaultVpcPrivateSubnet1RouteTable6B5D326E"
+    },
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "NatGatewayId": {
+     "Ref": "awsomefluxexampleclusterDefaultVpcPublicSubnet1NATGateway7E421EBF"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "awsome-flux-example-stack/awsome-flux-example-cluster/awsome-flux-example-cluster/DefaultVpc/PrivateSubnet1/DefaultRoute"
+   }
+  },
+  "awsomefluxexampleclusterDefaultVpcPrivateSubnet2SubnetDC32EE9D": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "VpcId": {
+     "Ref": "awsomefluxexampleclusterDefaultVpc43FF4778"
+    },
+    "AvailabilityZone": {
+     "Fn::Select": [
+      1,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.192.0/18",
+    "MapPublicIpOnLaunch": false,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Private"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Private"
+     },
+     {
+      "Key": "kubernetes.io/role/internal-elb",
+      "Value": "1"
+     },
+     {
+      "Key": "Name",
+      "Value": "awsome-flux-example-stack/awsome-flux-example-cluster/awsome-flux-example-cluster/DefaultVpc/PrivateSubnet2"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "awsome-flux-example-stack/awsome-flux-example-cluster/awsome-flux-example-cluster/DefaultVpc/PrivateSubnet2/Subnet"
+   }
+  },
+  "awsomefluxexampleclusterDefaultVpcPrivateSubnet2RouteTable98481863": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "VpcId": {
+     "Ref": "awsomefluxexampleclusterDefaultVpc43FF4778"
+    },
+    "Tags": [
+     {
+      "Key": "kubernetes.io/role/internal-elb",
+      "Value": "1"
+     },
+     {
+      "Key": "Name",
+      "Value": "awsome-flux-example-stack/awsome-flux-example-cluster/awsome-flux-example-cluster/DefaultVpc/PrivateSubnet2"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "awsome-flux-example-stack/awsome-flux-example-cluster/awsome-flux-example-cluster/DefaultVpc/PrivateSubnet2/RouteTable"
+   }
+  },
+  "awsomefluxexampleclusterDefaultVpcPrivateSubnet2RouteTableAssociationF3141643": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "awsomefluxexampleclusterDefaultVpcPrivateSubnet2RouteTable98481863"
+    },
+    "SubnetId": {
+     "Ref": "awsomefluxexampleclusterDefaultVpcPrivateSubnet2SubnetDC32EE9D"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "awsome-flux-example-stack/awsome-flux-example-cluster/awsome-flux-example-cluster/DefaultVpc/PrivateSubnet2/RouteTableAssociation"
+   }
+  },
+  "awsomefluxexampleclusterDefaultVpcPrivateSubnet2DefaultRouteE25AB025": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "awsomefluxexampleclusterDefaultVpcPrivateSubnet2RouteTable98481863"
+    },
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "NatGatewayId": {
+     "Ref": "awsomefluxexampleclusterDefaultVpcPublicSubnet2NATGateway6A5FB87F"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "awsome-flux-example-stack/awsome-flux-example-cluster/awsome-flux-example-cluster/DefaultVpc/PrivateSubnet2/DefaultRoute"
+   }
+  },
+  "awsomefluxexampleclusterDefaultVpcIGW9BF343A5": {
+   "Type": "AWS::EC2::InternetGateway",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "awsome-flux-example-stack/awsome-flux-example-cluster/awsome-flux-example-cluster/DefaultVpc"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "awsome-flux-example-stack/awsome-flux-example-cluster/awsome-flux-example-cluster/DefaultVpc/IGW"
+   }
+  },
+  "awsomefluxexampleclusterDefaultVpcVPCGW38476BB4": {
+   "Type": "AWS::EC2::VPCGatewayAttachment",
+   "Properties": {
+    "VpcId": {
+     "Ref": "awsomefluxexampleclusterDefaultVpc43FF4778"
+    },
+    "InternetGatewayId": {
+     "Ref": "awsomefluxexampleclusterDefaultVpcIGW9BF343A5"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "awsome-flux-example-stack/awsome-flux-example-cluster/awsome-flux-example-cluster/DefaultVpc/VPCGW"
+   }
+  },
+  "awsomefluxexampleclusterRole0311CD39": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "eks.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/AmazonEKSClusterPolicy"
+       ]
+      ]
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "awsome-flux-example-stack/awsome-flux-example-cluster/awsome-flux-example-cluster/Role/Resource"
+   }
+  },
+  "awsomefluxexampleclusterControlPlaneSecurityGroupD2CA5DD5": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "EKS Control Plane Security Group",
+    "SecurityGroupEgress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow all outbound traffic by default",
+      "IpProtocol": "-1"
+     }
+    ],
+    "VpcId": {
+     "Ref": "awsomefluxexampleclusterDefaultVpc43FF4778"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "awsome-flux-example-stack/awsome-flux-example-cluster/awsome-flux-example-cluster/ControlPlaneSecurityGroup/Resource"
+   }
+  },
+  "awsomefluxexampleclusterCreationRoleEEC56F7E": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "AWS": {
+         "Fn::Join": [
+          "",
+          [
+           "arn:",
+           {
+            "Ref": "AWS::Partition"
+           },
+           ":iam::",
+           {
+            "Ref": "AWS::AccountId"
+           },
+           ":root"
+          ]
+         ]
+        }
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   },
+   "DependsOn": [
+    "awsomefluxexampleclusterDefaultVpcIGW9BF343A5",
+    "awsomefluxexampleclusterDefaultVpcPrivateSubnet1DefaultRouteB73E48B1",
+    "awsomefluxexampleclusterDefaultVpcPrivateSubnet1RouteTable6B5D326E",
+    "awsomefluxexampleclusterDefaultVpcPrivateSubnet1RouteTableAssociation07BA9A57",
+    "awsomefluxexampleclusterDefaultVpcPrivateSubnet1Subnet46881CD1",
+    "awsomefluxexampleclusterDefaultVpcPrivateSubnet2DefaultRouteE25AB025",
+    "awsomefluxexampleclusterDefaultVpcPrivateSubnet2RouteTable98481863",
+    "awsomefluxexampleclusterDefaultVpcPrivateSubnet2RouteTableAssociationF3141643",
+    "awsomefluxexampleclusterDefaultVpcPrivateSubnet2SubnetDC32EE9D",
+    "awsomefluxexampleclusterDefaultVpcPublicSubnet1DefaultRoute4ECBCFC2",
+    "awsomefluxexampleclusterDefaultVpcPublicSubnet1EIP40F64B69",
+    "awsomefluxexampleclusterDefaultVpcPublicSubnet1NATGateway7E421EBF",
+    "awsomefluxexampleclusterDefaultVpcPublicSubnet1RouteTableBAEEEA8E",
+    "awsomefluxexampleclusterDefaultVpcPublicSubnet1RouteTableAssociation7DA9C3ED",
+    "awsomefluxexampleclusterDefaultVpcPublicSubnet1SubnetCDE5083C",
+    "awsomefluxexampleclusterDefaultVpcPublicSubnet2DefaultRouteF3CE632B",
+    "awsomefluxexampleclusterDefaultVpcPublicSubnet2EIP462B5F68",
+    "awsomefluxexampleclusterDefaultVpcPublicSubnet2NATGateway6A5FB87F",
+    "awsomefluxexampleclusterDefaultVpcPublicSubnet2RouteTable3F4234C7",
+    "awsomefluxexampleclusterDefaultVpcPublicSubnet2RouteTableAssociation49D14DAD",
+    "awsomefluxexampleclusterDefaultVpcPublicSubnet2SubnetDE991E42",
+    "awsomefluxexampleclusterDefaultVpc43FF4778",
+    "awsomefluxexampleclusterDefaultVpcVPCGW38476BB4"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "awsome-flux-example-stack/awsome-flux-example-cluster/awsome-flux-example-cluster/Resource/CreationRole/Resource"
+   }
+  },
+  "awsomefluxexampleclusterCreationRoleDefaultPolicyB89F9AA5": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "iam:PassRole",
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::GetAtt": [
+         "awsomefluxexampleclusterRole0311CD39",
+         "Arn"
+        ]
+       }
+      },
+      {
+       "Action": [
+        "eks:CreateCluster",
+        "eks:DescribeCluster",
+        "eks:DescribeUpdate",
+        "eks:DeleteCluster",
+        "eks:UpdateClusterVersion",
+        "eks:UpdateClusterConfig",
+        "eks:CreateFargateProfile",
+        "eks:TagResource",
+        "eks:UntagResource"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        "*"
+       ]
+      },
+      {
+       "Action": [
+        "eks:DescribeFargateProfile",
+        "eks:DeleteFargateProfile"
+       ],
+       "Effect": "Allow",
+       "Resource": "*"
+      },
+      {
+       "Action": [
+        "iam:GetRole",
+        "iam:listAttachedRolePolicies"
+       ],
+       "Effect": "Allow",
+       "Resource": "*"
+      },
+      {
+       "Action": "iam:CreateServiceLinkedRole",
+       "Effect": "Allow",
+       "Resource": "*"
+      },
+      {
+       "Action": [
+        "ec2:DescribeInstances",
+        "ec2:DescribeNetworkInterfaces",
+        "ec2:DescribeSecurityGroups",
+        "ec2:DescribeSubnets",
+        "ec2:DescribeRouteTables",
+        "ec2:DescribeDhcpOptions",
+        "ec2:DescribeVpcs"
+       ],
+       "Effect": "Allow",
+       "Resource": "*"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "awsomefluxexampleclusterCreationRoleDefaultPolicyB89F9AA5",
+    "Roles": [
+     {
+      "Ref": "awsomefluxexampleclusterCreationRoleEEC56F7E"
+     }
+    ]
+   },
+   "DependsOn": [
+    "awsomefluxexampleclusterDefaultVpcIGW9BF343A5",
+    "awsomefluxexampleclusterDefaultVpcPrivateSubnet1DefaultRouteB73E48B1",
+    "awsomefluxexampleclusterDefaultVpcPrivateSubnet1RouteTable6B5D326E",
+    "awsomefluxexampleclusterDefaultVpcPrivateSubnet1RouteTableAssociation07BA9A57",
+    "awsomefluxexampleclusterDefaultVpcPrivateSubnet1Subnet46881CD1",
+    "awsomefluxexampleclusterDefaultVpcPrivateSubnet2DefaultRouteE25AB025",
+    "awsomefluxexampleclusterDefaultVpcPrivateSubnet2RouteTable98481863",
+    "awsomefluxexampleclusterDefaultVpcPrivateSubnet2RouteTableAssociationF3141643",
+    "awsomefluxexampleclusterDefaultVpcPrivateSubnet2SubnetDC32EE9D",
+    "awsomefluxexampleclusterDefaultVpcPublicSubnet1DefaultRoute4ECBCFC2",
+    "awsomefluxexampleclusterDefaultVpcPublicSubnet1EIP40F64B69",
+    "awsomefluxexampleclusterDefaultVpcPublicSubnet1NATGateway7E421EBF",
+    "awsomefluxexampleclusterDefaultVpcPublicSubnet1RouteTableBAEEEA8E",
+    "awsomefluxexampleclusterDefaultVpcPublicSubnet1RouteTableAssociation7DA9C3ED",
+    "awsomefluxexampleclusterDefaultVpcPublicSubnet1SubnetCDE5083C",
+    "awsomefluxexampleclusterDefaultVpcPublicSubnet2DefaultRouteF3CE632B",
+    "awsomefluxexampleclusterDefaultVpcPublicSubnet2EIP462B5F68",
+    "awsomefluxexampleclusterDefaultVpcPublicSubnet2NATGateway6A5FB87F",
+    "awsomefluxexampleclusterDefaultVpcPublicSubnet2RouteTable3F4234C7",
+    "awsomefluxexampleclusterDefaultVpcPublicSubnet2RouteTableAssociation49D14DAD",
+    "awsomefluxexampleclusterDefaultVpcPublicSubnet2SubnetDE991E42",
+    "awsomefluxexampleclusterDefaultVpc43FF4778",
+    "awsomefluxexampleclusterDefaultVpcVPCGW38476BB4"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "awsome-flux-example-stack/awsome-flux-example-cluster/awsome-flux-example-cluster/Resource/CreationRole/DefaultPolicy/Resource"
+   }
+  },
+  "awsomefluxexamplecluster7E1AB52B": {
+   "Type": "Custom::AWSCDK-EKS-Cluster",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "awscdkawseksClusterResourceProviderNestedStackawscdkawseksClusterResourceProviderNestedStackResource9827C454",
+      "Outputs.awsomefluxexamplestackawscdkawseksClusterResourceProviderframeworkonEvent7899144BArn"
+     ]
+    },
+    "Config": {
+     "version": "1.21",
+     "roleArn": {
+      "Fn::GetAtt": [
+       "awsomefluxexampleclusterRole0311CD39",
+       "Arn"
+      ]
+     },
+     "resourcesVpcConfig": {
+      "subnetIds": [
+       {
+        "Ref": "awsomefluxexampleclusterDefaultVpcPublicSubnet1SubnetCDE5083C"
+       },
+       {
+        "Ref": "awsomefluxexampleclusterDefaultVpcPublicSubnet2SubnetDE991E42"
+       },
+       {
+        "Ref": "awsomefluxexampleclusterDefaultVpcPrivateSubnet1Subnet46881CD1"
+       },
+       {
+        "Ref": "awsomefluxexampleclusterDefaultVpcPrivateSubnet2SubnetDC32EE9D"
+       }
+      ],
+      "securityGroupIds": [
+       {
+        "Fn::GetAtt": [
+         "awsomefluxexampleclusterControlPlaneSecurityGroupD2CA5DD5",
+         "GroupId"
+        ]
+       }
+      ],
+      "endpointPublicAccess": true,
+      "endpointPrivateAccess": true
+     }
+    },
+    "AssumeRoleArn": {
+     "Fn::GetAtt": [
+      "awsomefluxexampleclusterCreationRoleEEC56F7E",
+      "Arn"
+     ]
+    },
+    "AttributesRevision": 2
+   },
+   "DependsOn": [
+    "awsomefluxexampleclusterDefaultVpcIGW9BF343A5",
+    "awsomefluxexampleclusterDefaultVpcPrivateSubnet1DefaultRouteB73E48B1",
+    "awsomefluxexampleclusterDefaultVpcPrivateSubnet1RouteTable6B5D326E",
+    "awsomefluxexampleclusterDefaultVpcPrivateSubnet1RouteTableAssociation07BA9A57",
+    "awsomefluxexampleclusterDefaultVpcPrivateSubnet1Subnet46881CD1",
+    "awsomefluxexampleclusterDefaultVpcPrivateSubnet2DefaultRouteE25AB025",
+    "awsomefluxexampleclusterDefaultVpcPrivateSubnet2RouteTable98481863",
+    "awsomefluxexampleclusterDefaultVpcPrivateSubnet2RouteTableAssociationF3141643",
+    "awsomefluxexampleclusterDefaultVpcPrivateSubnet2SubnetDC32EE9D",
+    "awsomefluxexampleclusterDefaultVpcPublicSubnet1DefaultRoute4ECBCFC2",
+    "awsomefluxexampleclusterDefaultVpcPublicSubnet1EIP40F64B69",
+    "awsomefluxexampleclusterDefaultVpcPublicSubnet1NATGateway7E421EBF",
+    "awsomefluxexampleclusterDefaultVpcPublicSubnet1RouteTableBAEEEA8E",
+    "awsomefluxexampleclusterDefaultVpcPublicSubnet1RouteTableAssociation7DA9C3ED",
+    "awsomefluxexampleclusterDefaultVpcPublicSubnet1SubnetCDE5083C",
+    "awsomefluxexampleclusterDefaultVpcPublicSubnet2DefaultRouteF3CE632B",
+    "awsomefluxexampleclusterDefaultVpcPublicSubnet2EIP462B5F68",
+    "awsomefluxexampleclusterDefaultVpcPublicSubnet2NATGateway6A5FB87F",
+    "awsomefluxexampleclusterDefaultVpcPublicSubnet2RouteTable3F4234C7",
+    "awsomefluxexampleclusterDefaultVpcPublicSubnet2RouteTableAssociation49D14DAD",
+    "awsomefluxexampleclusterDefaultVpcPublicSubnet2SubnetDE991E42",
+    "awsomefluxexampleclusterDefaultVpc43FF4778",
+    "awsomefluxexampleclusterDefaultVpcVPCGW38476BB4",
+    "awsomefluxexampleclusterCreationRoleDefaultPolicyB89F9AA5",
+    "awsomefluxexampleclusterCreationRoleEEC56F7E"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "awsome-flux-example-stack/awsome-flux-example-cluster/awsome-flux-example-cluster/Resource/Resource/Default"
+   }
+  },
+  "awsomefluxexampleclusterKubectlReadyBarrier0DA318A6": {
+   "Type": "AWS::SSM::Parameter",
+   "Properties": {
+    "Type": "String",
+    "Value": "aws:cdk:eks:kubectl-ready"
+   },
+   "DependsOn": [
+    "awsomefluxexampleclusterCreationRoleDefaultPolicyB89F9AA5",
+    "awsomefluxexampleclusterCreationRoleEEC56F7E",
+    "awsomefluxexamplecluster7E1AB52B"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "awsome-flux-example-stack/awsome-flux-example-cluster/awsome-flux-example-cluster/KubectlReadyBarrier"
+   }
+  },
+  "awsomefluxexampleclusterMastersRole1B1D2CE8": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "AWS": {
+         "Fn::Join": [
+          "",
+          [
+           "arn:",
+           {
+            "Ref": "AWS::Partition"
+           },
+           ":iam::",
+           {
+            "Ref": "AWS::AccountId"
+           },
+           ":root"
+          ]
+         ]
+        }
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "awsome-flux-example-stack/awsome-flux-example-cluster/awsome-flux-example-cluster/MastersRole/Resource"
+   }
+  },
+  "awsomefluxexampleclusterAwsAuthmanifest90DD86E9": {
+   "Type": "Custom::AWSCDK-EKS-KubernetesResource",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
+      "Outputs.awsomefluxexamplestackawscdkawseksKubectlProviderframeworkonEvent60B0EC45Arn"
+     ]
+    },
+    "Manifest": {
+     "Fn::Join": [
+      "",
+      [
+       "[{\"apiVersion\":\"v1\",\"kind\":\"ConfigMap\",\"metadata\":{\"name\":\"aws-auth\",\"namespace\":\"kube-system\",\"labels\":{\"aws.cdk.eks/prune-c817594f93c36af448affafe154ce5853f04f9e085\":\"\"}},\"data\":{\"mapRoles\":\"[{\\\"rolearn\\\":\\\"",
+       {
+        "Fn::GetAtt": [
+         "awsomefluxexampleclusterMastersRole1B1D2CE8",
+         "Arn"
+        ]
+       },
+       "\\\",\\\"username\\\":\\\"",
+       {
+        "Fn::GetAtt": [
+         "awsomefluxexampleclusterMastersRole1B1D2CE8",
+         "Arn"
+        ]
+       },
+       "\\\",\\\"groups\\\":[\\\"system:masters\\\"]},{\\\"rolearn\\\":\\\"",
+       {
+        "Fn::GetAtt": [
+         "awsomefluxexampleclusterNodegroupDefaultCapacityNodeGroupRoleAED8FCFE",
+         "Arn"
+        ]
+       },
+       "\\\",\\\"username\\\":\\\"system:node:{{EC2PrivateDNSName}}\\\",\\\"groups\\\":[\\\"system:bootstrappers\\\",\\\"system:nodes\\\"]}]\",\"mapUsers\":\"[]\",\"mapAccounts\":\"[]\"}}]"
+      ]
+     ]
+    },
+    "ClusterName": {
+     "Ref": "awsomefluxexamplecluster7E1AB52B"
+    },
+    "RoleArn": {
+     "Fn::GetAtt": [
+      "awsomefluxexampleclusterCreationRoleEEC56F7E",
+      "Arn"
+     ]
+    },
+    "PruneLabel": "aws.cdk.eks/prune-c817594f93c36af448affafe154ce5853f04f9e085",
+    "Overwrite": true
+   },
+   "DependsOn": [
+    "awsomefluxexampleclusterKubectlReadyBarrier0DA318A6"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "awsome-flux-example-stack/awsome-flux-example-cluster/awsome-flux-example-cluster/AwsAuth/manifest/Resource/Default"
+   }
+  },
+  "awsomefluxexampleclusterNodegroupDefaultCapacityNodeGroupRoleAED8FCFE": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "ec2.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/AmazonEKSWorkerNodePolicy"
+       ]
+      ]
+     },
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/AmazonEKS_CNI_Policy"
+       ]
+      ]
+     },
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
+       ]
+      ]
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "awsome-flux-example-stack/awsome-flux-example-cluster/awsome-flux-example-cluster/NodegroupDefaultCapacity/NodeGroupRole/Resource"
+   }
+  },
+  "awsomefluxexampleclusterNodegroupDefaultCapacity38FC71E9": {
+   "Type": "AWS::EKS::Nodegroup",
+   "Properties": {
+    "ClusterName": {
+     "Ref": "awsomefluxexamplecluster7E1AB52B"
+    },
+    "NodeRole": {
+     "Fn::GetAtt": [
+      "awsomefluxexampleclusterNodegroupDefaultCapacityNodeGroupRoleAED8FCFE",
+      "Arn"
+     ]
+    },
+    "Subnets": [
+     {
+      "Ref": "awsomefluxexampleclusterDefaultVpcPrivateSubnet1Subnet46881CD1"
+     },
+     {
+      "Ref": "awsomefluxexampleclusterDefaultVpcPrivateSubnet2SubnetDC32EE9D"
+     }
+    ],
+    "AmiType": "AL2_x86_64",
+    "ForceUpdateEnabled": true,
+    "InstanceTypes": [
+     "m5.large"
+    ],
+    "ScalingConfig": {
+     "DesiredSize": 2,
+     "MaxSize": 2,
+     "MinSize": 2
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "awsome-flux-example-stack/awsome-flux-example-cluster/awsome-flux-example-cluster/NodegroupDefaultCapacity/Resource"
+   }
+  },
+  "awscdkawseksClusterResourceProviderNestedStackawscdkawseksClusterResourceProviderNestedStackResource9827C454": {
+   "Type": "AWS::CloudFormation::Stack",
+   "Properties": {
+    "TemplateURL": {
+     "Fn::Join": [
+      "",
+      [
+       "https://s3.us-east-2.",
+       {
+        "Ref": "AWS::URLSuffix"
+       },
+       "/",
+       {
+        "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-us-east-2"
+       },
+       "/a176822e27c9d48127fc6b774aca12f9c941c51ab3b22ef3610438b09ffe8d48.json"
+      ]
+     ]
+    },
+    "Parameters": {
+     "referencetoawsomefluxexamplestackawsomefluxexampleclusterCreationRole588EF267Arn": {
+      "Fn::GetAtt": [
+       "awsomefluxexampleclusterCreationRoleEEC56F7E",
+       "Arn"
+      ]
+     }
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "awsome-flux-example-stack/@aws-cdk--aws-eks.ClusterResourceProvider.NestedStack/@aws-cdk--aws-eks.ClusterResourceProvider.NestedStackResource",
+    "aws:asset:path": "awsomefluxexamplestackawscdkawseksClusterResourceProvider47435A70.nested.template.json",
+    "aws:asset:property": "TemplateURL"
+   }
+  },
+  "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B": {
+   "Type": "AWS::CloudFormation::Stack",
+   "Properties": {
+    "TemplateURL": {
+     "Fn::Join": [
+      "",
+      [
+       "https://s3.us-east-2.",
+       {
+        "Ref": "AWS::URLSuffix"
+       },
+       "/",
+       {
+        "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-us-east-2"
+       },
+       "/617a066aca0ff41c2d8eada5c3032aa289a91f48b4edbafab2caeba91f403dde.json"
+      ]
+     ]
+    },
+    "Parameters": {
+     "referencetoawsomefluxexamplestackawsomefluxexamplecluster301EAC35Arn": {
+      "Fn::GetAtt": [
+       "awsomefluxexamplecluster7E1AB52B",
+       "Arn"
+      ]
+     },
+     "referencetoawsomefluxexamplestackawsomefluxexampleclusterCreationRole588EF267Arn": {
+      "Fn::GetAtt": [
+       "awsomefluxexampleclusterCreationRoleEEC56F7E",
+       "Arn"
+      ]
+     },
+     "referencetoawsomefluxexamplestackawsomefluxexampleclusterDefaultVpcPrivateSubnet1Subnet458EC5B5Ref": {
+      "Ref": "awsomefluxexampleclusterDefaultVpcPrivateSubnet1Subnet46881CD1"
+     },
+     "referencetoawsomefluxexamplestackawsomefluxexampleclusterDefaultVpcPrivateSubnet2Subnet74AFF6E0Ref": {
+      "Ref": "awsomefluxexampleclusterDefaultVpcPrivateSubnet2SubnetDC32EE9D"
+     },
+     "referencetoawsomefluxexamplestackawsomefluxexamplecluster301EAC35ClusterSecurityGroupId": {
+      "Fn::GetAtt": [
+       "awsomefluxexamplecluster7E1AB52B",
+       "ClusterSecurityGroupId"
+      ]
+     }
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "awsome-flux-example-stack/@aws-cdk--aws-eks.KubectlProvider.NestedStack/@aws-cdk--aws-eks.KubectlProvider.NestedStackResource",
+    "aws:asset:path": "awsomefluxexamplestackawscdkawseksKubectlProviderF6DF55D5.nested.template.json",
+    "aws:asset:property": "TemplateURL"
+   }
+  },
+  "awsomefluxexampledockerpipelineawsomefluxexamplecontainer23E06EAE": {
+   "Type": "AWS::ECR::Repository",
+   "Properties": {
+    "RepositoryName": "awsome-flux-example"
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain",
+   "Metadata": {
+    "aws:cdk:path": "awsome-flux-example-stack/awsome-flux-example-docker-pipeline/awsome-flux-example-container/Resource"
+   }
+  },
+  "awsomefluxexampledockerpipelineawsomefluxexamplecontainergitBF92E00C": {
+   "Type": "AWS::CodeCommit::Repository",
+   "Properties": {
+    "RepositoryName": "awsome-flux-example",
+    "RepositoryDescription": "Application code"
+   },
+   "Metadata": {
+    "aws:cdk:path": "awsome-flux-example-stack/awsome-flux-example-docker-pipeline/awsome-flux-example-container-git/Resource"
+   }
+  },
+  "awsomefluxexampledockerpipelineawsomefluxexamplecontainergitawsomefluxexamplestackawsomefluxexampledockerpipelineawsomefluxexamplecontainerpipeline75CF0A7DEventRule4804C4A5": {
+   "Type": "AWS::Events::Rule",
+   "Properties": {
+    "EventPattern": {
+     "source": [
+      "aws.codecommit"
+     ],
+     "resources": [
+      {
+       "Fn::GetAtt": [
+        "awsomefluxexampledockerpipelineawsomefluxexamplecontainergitBF92E00C",
+        "Arn"
+       ]
+      }
+     ],
+     "detail-type": [
+      "CodeCommit Repository State Change"
+     ],
+     "detail": {
+      "event": [
+       "referenceCreated",
+       "referenceUpdated"
+      ],
+      "referenceName": [
+       "master"
+      ]
+     }
+    },
+    "State": "ENABLED",
+    "Targets": [
+     {
+      "Arn": {
+       "Fn::Join": [
+        "",
+        [
+         "arn:",
+         {
+          "Ref": "AWS::Partition"
+         },
+         ":codepipeline:us-east-2:",
+         {
+          "Ref": "AWS::AccountId"
+         },
+         ":",
+         {
+          "Ref": "awsomefluxexampledockerpipelineawsomefluxexamplecontainerpipelineEBF581BB"
+         }
+        ]
+       ]
+      },
+      "Id": "Target0",
+      "RoleArn": {
+       "Fn::GetAtt": [
+        "awsomefluxexampledockerpipelineawsomefluxexamplecontainerpipelineEventsRole39A4E862",
+        "Arn"
+       ]
+      }
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "awsome-flux-example-stack/awsome-flux-example-docker-pipeline/awsome-flux-example-container-git/awsomefluxexamplestackawsomefluxexampledockerpipelineawsomefluxexamplecontainerpipeline75CF0A7DEventRule/Resource"
+   }
+  },
+  "awsomefluxexampledockerpipelineawsomefluxexamplecontainerpipelineArtifactsBucketEncryptionKey9F6896D1": {
+   "Type": "AWS::KMS::Key",
+   "Properties": {
+    "KeyPolicy": {
+     "Statement": [
+      {
+       "Action": "kms:*",
+       "Effect": "Allow",
+       "Principal": {
+        "AWS": {
+         "Fn::Join": [
+          "",
+          [
+           "arn:",
+           {
+            "Ref": "AWS::Partition"
+           },
+           ":iam::",
+           {
+            "Ref": "AWS::AccountId"
+           },
+           ":root"
+          ]
+         ]
+        }
+       },
+       "Resource": "*"
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "awsome-flux-example-stack/awsome-flux-example-docker-pipeline/awsome-flux-example-container--pipeline/ArtifactsBucketEncryptionKey/Resource"
+   }
+  },
+  "awsomefluxexampledockerpipelineawsomefluxexamplecontainerpipelineArtifactsBucketEncryptionKeyAliasCA25191F": {
+   "Type": "AWS::KMS::Alias",
+   "Properties": {
+    "AliasName": "alias/codepipeline-awsomefluxexamplestackawsomefluxexampledockerpipelineawsomefluxexamplecontainerpipeline75cf0a7d",
+    "TargetKeyId": {
+     "Fn::GetAtt": [
+      "awsomefluxexampledockerpipelineawsomefluxexamplecontainerpipelineArtifactsBucketEncryptionKey9F6896D1",
+      "Arn"
+     ]
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "awsome-flux-example-stack/awsome-flux-example-docker-pipeline/awsome-flux-example-container--pipeline/ArtifactsBucketEncryptionKeyAlias/Resource"
+   }
+  },
+  "awsomefluxexampledockerpipelineawsomefluxexamplecontainerpipelineArtifactsBucket21F8A813": {
+   "Type": "AWS::S3::Bucket",
+   "Properties": {
+    "BucketEncryption": {
+     "ServerSideEncryptionConfiguration": [
+      {
+       "ServerSideEncryptionByDefault": {
+        "KMSMasterKeyID": {
+         "Fn::GetAtt": [
+          "awsomefluxexampledockerpipelineawsomefluxexamplecontainerpipelineArtifactsBucketEncryptionKey9F6896D1",
+          "Arn"
+         ]
+        },
+        "SSEAlgorithm": "aws:kms"
+       }
+      }
+     ]
+    },
+    "PublicAccessBlockConfiguration": {
+     "BlockPublicAcls": true,
+     "BlockPublicPolicy": true,
+     "IgnorePublicAcls": true,
+     "RestrictPublicBuckets": true
+    }
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain",
+   "Metadata": {
+    "aws:cdk:path": "awsome-flux-example-stack/awsome-flux-example-docker-pipeline/awsome-flux-example-container--pipeline/ArtifactsBucket/Resource"
+   }
+  },
+  "awsomefluxexampledockerpipelineawsomefluxexamplecontainerpipelineArtifactsBucketPolicy08E57BF3": {
+   "Type": "AWS::S3::BucketPolicy",
+   "Properties": {
+    "Bucket": {
+     "Ref": "awsomefluxexampledockerpipelineawsomefluxexamplecontainerpipelineArtifactsBucket21F8A813"
+    },
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "s3:*",
+       "Condition": {
+        "Bool": {
+         "aws:SecureTransport": "false"
+        }
+       },
+       "Effect": "Deny",
+       "Principal": {
+        "AWS": "*"
+       },
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "awsomefluxexampledockerpipelineawsomefluxexamplecontainerpipelineArtifactsBucket21F8A813",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::GetAtt": [
+             "awsomefluxexampledockerpipelineawsomefluxexamplecontainerpipelineArtifactsBucket21F8A813",
+             "Arn"
+            ]
+           },
+           "/*"
+          ]
+         ]
+        }
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "awsome-flux-example-stack/awsome-flux-example-docker-pipeline/awsome-flux-example-container--pipeline/ArtifactsBucket/Policy/Resource"
+   }
+  },
+  "awsomefluxexampledockerpipelineawsomefluxexamplecontainerpipelineRoleC69ED2CB": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "codepipeline.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "awsome-flux-example-stack/awsome-flux-example-docker-pipeline/awsome-flux-example-container--pipeline/Role/Resource"
+   }
+  },
+  "awsomefluxexampledockerpipelineawsomefluxexamplecontainerpipelineRoleDefaultPolicyC2FF4E06": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "s3:GetObject*",
+        "s3:GetBucket*",
+        "s3:List*",
+        "s3:DeleteObject*",
+        "s3:PutObject",
+        "s3:PutObjectLegalHold",
+        "s3:PutObjectRetention",
+        "s3:PutObjectTagging",
+        "s3:PutObjectVersionTagging",
+        "s3:Abort*"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "awsomefluxexampledockerpipelineawsomefluxexamplecontainerpipelineArtifactsBucket21F8A813",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::GetAtt": [
+             "awsomefluxexampledockerpipelineawsomefluxexamplecontainerpipelineArtifactsBucket21F8A813",
+             "Arn"
+            ]
+           },
+           "/*"
+          ]
+         ]
+        }
+       ]
+      },
+      {
+       "Action": [
+        "kms:Decrypt",
+        "kms:DescribeKey",
+        "kms:Encrypt",
+        "kms:ReEncrypt*",
+        "kms:GenerateDataKey*"
+       ],
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::GetAtt": [
+         "awsomefluxexampledockerpipelineawsomefluxexamplecontainerpipelineArtifactsBucketEncryptionKey9F6896D1",
+         "Arn"
+        ]
+       }
+      },
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::GetAtt": [
+         "awsomefluxexampledockerpipelineawsomefluxexamplecontainerpipelineSourceCodeCommitSourceCodePipelineActionRole05C7183F",
+         "Arn"
+        ]
+       }
+      },
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::GetAtt": [
+         "awsomefluxexampledockerpipelineawsomefluxexamplecontainerpipelineDockerBuildDockerBuildandPushECRCodePipelineActionRoleC7E95C6B",
+         "Arn"
+        ]
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "awsomefluxexampledockerpipelineawsomefluxexamplecontainerpipelineRoleDefaultPolicyC2FF4E06",
+    "Roles": [
+     {
+      "Ref": "awsomefluxexampledockerpipelineawsomefluxexamplecontainerpipelineRoleC69ED2CB"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "awsome-flux-example-stack/awsome-flux-example-docker-pipeline/awsome-flux-example-container--pipeline/Role/DefaultPolicy/Resource"
+   }
+  },
+  "awsomefluxexampledockerpipelineawsomefluxexamplecontainerpipelineEBF581BB": {
+   "Type": "AWS::CodePipeline::Pipeline",
+   "Properties": {
+    "RoleArn": {
+     "Fn::GetAtt": [
+      "awsomefluxexampledockerpipelineawsomefluxexamplecontainerpipelineRoleC69ED2CB",
+      "Arn"
+     ]
+    },
+    "Stages": [
+     {
+      "Actions": [
+       {
+        "ActionTypeId": {
+         "Category": "Source",
+         "Owner": "AWS",
+         "Provider": "CodeCommit",
+         "Version": "1"
+        },
+        "Configuration": {
+         "RepositoryName": {
+          "Fn::GetAtt": [
+           "awsomefluxexampledockerpipelineawsomefluxexamplecontainergitBF92E00C",
+           "Name"
+          ]
+         },
+         "BranchName": "master",
+         "PollForSourceChanges": false
+        },
+        "Name": "CodeCommit_Source",
+        "OutputArtifacts": [
+         {
+          "Name": "Artifact_Source_CodeCommit_Source"
+         }
+        ],
+        "RoleArn": {
+         "Fn::GetAtt": [
+          "awsomefluxexampledockerpipelineawsomefluxexamplecontainerpipelineSourceCodeCommitSourceCodePipelineActionRole05C7183F",
+          "Arn"
+         ]
+        },
+        "RunOrder": 1
+       }
+      ],
+      "Name": "Source"
+     },
+     {
+      "Actions": [
+       {
+        "ActionTypeId": {
+         "Category": "Build",
+         "Owner": "AWS",
+         "Provider": "CodeBuild",
+         "Version": "1"
+        },
+        "Configuration": {
+         "ProjectName": {
+          "Ref": "awsomefluxexampledockerpipelineDockerBuild45518260"
+         }
+        },
+        "InputArtifacts": [
+         {
+          "Name": "Artifact_Source_CodeCommit_Source"
+         }
+        ],
+        "Name": "DockerBuild_and_Push_ECR",
+        "OutputArtifacts": [
+         {
+          "Name": "Docker"
+         }
+        ],
+        "RoleArn": {
+         "Fn::GetAtt": [
+          "awsomefluxexampledockerpipelineawsomefluxexamplecontainerpipelineDockerBuildDockerBuildandPushECRCodePipelineActionRoleC7E95C6B",
+          "Arn"
+         ]
+        },
+        "RunOrder": 1
+       }
+      ],
+      "Name": "DockerBuild"
+     }
+    ],
+    "ArtifactStore": {
+     "EncryptionKey": {
+      "Id": {
+       "Fn::GetAtt": [
+        "awsomefluxexampledockerpipelineawsomefluxexamplecontainerpipelineArtifactsBucketEncryptionKey9F6896D1",
+        "Arn"
+       ]
+      },
+      "Type": "KMS"
+     },
+     "Location": {
+      "Ref": "awsomefluxexampledockerpipelineawsomefluxexamplecontainerpipelineArtifactsBucket21F8A813"
+     },
+     "Type": "S3"
+    },
+    "Name": "awsome-flux-example"
+   },
+   "DependsOn": [
+    "awsomefluxexampledockerpipelineawsomefluxexamplecontainerpipelineRoleDefaultPolicyC2FF4E06",
+    "awsomefluxexampledockerpipelineawsomefluxexamplecontainerpipelineRoleC69ED2CB"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "awsome-flux-example-stack/awsome-flux-example-docker-pipeline/awsome-flux-example-container--pipeline/Resource"
+   }
+  },
+  "awsomefluxexampledockerpipelineawsomefluxexamplecontainerpipelineSourceCodeCommitSourceCodePipelineActionRole05C7183F": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "AWS": {
+         "Fn::Join": [
+          "",
+          [
+           "arn:",
+           {
+            "Ref": "AWS::Partition"
+           },
+           ":iam::",
+           {
+            "Ref": "AWS::AccountId"
+           },
+           ":root"
+          ]
+         ]
+        }
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "awsome-flux-example-stack/awsome-flux-example-docker-pipeline/awsome-flux-example-container--pipeline/Source/CodeCommit_Source/CodePipelineActionRole/Resource"
+   }
+  },
+  "awsomefluxexampledockerpipelineawsomefluxexamplecontainerpipelineSourceCodeCommitSourceCodePipelineActionRoleDefaultPolicy58010713": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "s3:GetObject*",
+        "s3:GetBucket*",
+        "s3:List*",
+        "s3:DeleteObject*",
+        "s3:PutObject",
+        "s3:PutObjectLegalHold",
+        "s3:PutObjectRetention",
+        "s3:PutObjectTagging",
+        "s3:PutObjectVersionTagging",
+        "s3:Abort*"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "awsomefluxexampledockerpipelineawsomefluxexamplecontainerpipelineArtifactsBucket21F8A813",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::GetAtt": [
+             "awsomefluxexampledockerpipelineawsomefluxexamplecontainerpipelineArtifactsBucket21F8A813",
+             "Arn"
+            ]
+           },
+           "/*"
+          ]
+         ]
+        }
+       ]
+      },
+      {
+       "Action": [
+        "kms:Decrypt",
+        "kms:DescribeKey",
+        "kms:Encrypt",
+        "kms:ReEncrypt*",
+        "kms:GenerateDataKey*"
+       ],
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::GetAtt": [
+         "awsomefluxexampledockerpipelineawsomefluxexamplecontainerpipelineArtifactsBucketEncryptionKey9F6896D1",
+         "Arn"
+        ]
+       }
+      },
+      {
+       "Action": [
+        "codecommit:GetBranch",
+        "codecommit:GetCommit",
+        "codecommit:UploadArchive",
+        "codecommit:GetUploadArchiveStatus",
+        "codecommit:CancelUploadArchive"
+       ],
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::GetAtt": [
+         "awsomefluxexampledockerpipelineawsomefluxexamplecontainergitBF92E00C",
+         "Arn"
+        ]
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "somefluxexampledockerpipelineawsomefluxexamplecontainerpipelineSourceCodeCommitSourceCodePipelineActionRoleDefaultPolicy58010713",
+    "Roles": [
+     {
+      "Ref": "awsomefluxexampledockerpipelineawsomefluxexamplecontainerpipelineSourceCodeCommitSourceCodePipelineActionRole05C7183F"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "awsome-flux-example-stack/awsome-flux-example-docker-pipeline/awsome-flux-example-container--pipeline/Source/CodeCommit_Source/CodePipelineActionRole/DefaultPolicy/Resource"
+   }
+  },
+  "awsomefluxexampledockerpipelineawsomefluxexamplecontainerpipelineEventsRole39A4E862": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "events.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "awsome-flux-example-stack/awsome-flux-example-docker-pipeline/awsome-flux-example-container--pipeline/EventsRole/Resource"
+   }
+  },
+  "awsomefluxexampledockerpipelineawsomefluxexamplecontainerpipelineEventsRoleDefaultPolicy7F937C00": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "codepipeline:StartPipelineExecution",
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::Join": [
+         "",
+         [
+          "arn:",
+          {
+           "Ref": "AWS::Partition"
+          },
+          ":codepipeline:us-east-2:",
+          {
+           "Ref": "AWS::AccountId"
+          },
+          ":",
+          {
+           "Ref": "awsomefluxexampledockerpipelineawsomefluxexamplecontainerpipelineEBF581BB"
+          }
+         ]
+        ]
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "awsomefluxexampledockerpipelineawsomefluxexamplecontainerpipelineEventsRoleDefaultPolicy7F937C00",
+    "Roles": [
+     {
+      "Ref": "awsomefluxexampledockerpipelineawsomefluxexamplecontainerpipelineEventsRole39A4E862"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "awsome-flux-example-stack/awsome-flux-example-docker-pipeline/awsome-flux-example-container--pipeline/EventsRole/DefaultPolicy/Resource"
+   }
+  },
+  "awsomefluxexampledockerpipelineawsomefluxexamplecontainerpipelineDockerBuildDockerBuildandPushECRCodePipelineActionRoleC7E95C6B": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "AWS": {
+         "Fn::Join": [
+          "",
+          [
+           "arn:",
+           {
+            "Ref": "AWS::Partition"
+           },
+           ":iam::",
+           {
+            "Ref": "AWS::AccountId"
+           },
+           ":root"
+          ]
+         ]
+        }
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "awsome-flux-example-stack/awsome-flux-example-docker-pipeline/awsome-flux-example-container--pipeline/DockerBuild/DockerBuild_and_Push_ECR/CodePipelineActionRole/Resource"
+   }
+  },
+  "awsomefluxexampledockerpipelineawsomefluxexamplecontainerpipelineDockerBuildDockerBuildandPushECRCodePipelineActionRoleDefaultPolicy1455A1A5": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "codebuild:BatchGetBuilds",
+        "codebuild:StartBuild",
+        "codebuild:StopBuild"
+       ],
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::GetAtt": [
+         "awsomefluxexampledockerpipelineDockerBuild45518260",
+         "Arn"
+        ]
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "ampledockerpipelineawsomefluxexamplecontainerpipelineDockerBuildDockerBuildandPushECRCodePipelineActionRoleDefaultPolicy1455A1A5",
+    "Roles": [
+     {
+      "Ref": "awsomefluxexampledockerpipelineawsomefluxexamplecontainerpipelineDockerBuildDockerBuildandPushECRCodePipelineActionRoleC7E95C6B"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "awsome-flux-example-stack/awsome-flux-example-docker-pipeline/awsome-flux-example-container--pipeline/DockerBuild/DockerBuild_and_Push_ECR/CodePipelineActionRole/DefaultPolicy/Resource"
+   }
+  },
+  "awsomefluxexampledockerpipelineDockerBuildRole5EFB7C4B": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "codebuild.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "awsome-flux-example-stack/awsome-flux-example-docker-pipeline/DockerBuild/Role/Resource"
+   }
+  },
+  "awsomefluxexampledockerpipelineDockerBuildRoleDefaultPolicy9CCBA0AA": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "logs:CreateLogGroup",
+        "logs:CreateLogStream",
+        "logs:PutLogEvents"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::Join": [
+          "",
+          [
+           "arn:",
+           {
+            "Ref": "AWS::Partition"
+           },
+           ":logs:us-east-2:",
+           {
+            "Ref": "AWS::AccountId"
+           },
+           ":log-group:/aws/codebuild/",
+           {
+            "Ref": "awsomefluxexampledockerpipelineDockerBuild45518260"
+           }
+          ]
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           "arn:",
+           {
+            "Ref": "AWS::Partition"
+           },
+           ":logs:us-east-2:",
+           {
+            "Ref": "AWS::AccountId"
+           },
+           ":log-group:/aws/codebuild/",
+           {
+            "Ref": "awsomefluxexampledockerpipelineDockerBuild45518260"
+           },
+           ":*"
+          ]
+         ]
+        }
+       ]
+      },
+      {
+       "Action": [
+        "codebuild:CreateReportGroup",
+        "codebuild:CreateReport",
+        "codebuild:UpdateReport",
+        "codebuild:BatchPutTestCases",
+        "codebuild:BatchPutCodeCoverages"
+       ],
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::Join": [
+         "",
+         [
+          "arn:",
+          {
+           "Ref": "AWS::Partition"
+          },
+          ":codebuild:us-east-2:",
+          {
+           "Ref": "AWS::AccountId"
+          },
+          ":report-group/",
+          {
+           "Ref": "awsomefluxexampledockerpipelineDockerBuild45518260"
+          },
+          "-*"
+         ]
+        ]
+       }
+      },
+      {
+       "Action": [
+        "ecr:BatchCheckLayerAvailability",
+        "ecr:GetDownloadUrlForLayer",
+        "ecr:BatchGetImage"
+       ],
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::GetAtt": [
+         "awsomefluxexampledockerpipelineawsomefluxexamplecontainer23E06EAE",
+         "Arn"
+        ]
+       }
+      },
+      {
+       "Action": "ecr:GetAuthorizationToken",
+       "Effect": "Allow",
+       "Resource": "*"
+      },
+      {
+       "Action": [
+        "ecr:PutImage",
+        "ecr:InitiateLayerUpload",
+        "ecr:UploadLayerPart",
+        "ecr:CompleteLayerUpload"
+       ],
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::GetAtt": [
+         "awsomefluxexampledockerpipelineawsomefluxexamplecontainer23E06EAE",
+         "Arn"
+        ]
+       }
+      },
+      {
+       "Action": [
+        "ecr:BatchCheckLayerAvailability",
+        "ecr:GetDownloadUrlForLayer",
+        "ecr:BatchGetImage"
+       ],
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::Join": [
+         "",
+         [
+          "arn:",
+          {
+           "Ref": "AWS::Partition"
+          },
+          ":ecr:us-east-2:",
+          {
+           "Ref": "AWS::AccountId"
+          },
+          ":repository/*"
+         ]
+        ]
+       }
+      },
+      {
+       "Action": [
+        "s3:GetObject*",
+        "s3:GetBucket*",
+        "s3:List*",
+        "s3:DeleteObject*",
+        "s3:PutObject",
+        "s3:PutObjectLegalHold",
+        "s3:PutObjectRetention",
+        "s3:PutObjectTagging",
+        "s3:PutObjectVersionTagging",
+        "s3:Abort*"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "awsomefluxexampledockerpipelineawsomefluxexamplecontainerpipelineArtifactsBucket21F8A813",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::GetAtt": [
+             "awsomefluxexampledockerpipelineawsomefluxexamplecontainerpipelineArtifactsBucket21F8A813",
+             "Arn"
+            ]
+           },
+           "/*"
+          ]
+         ]
+        }
+       ]
+      },
+      {
+       "Action": [
+        "kms:Decrypt",
+        "kms:DescribeKey",
+        "kms:Encrypt",
+        "kms:ReEncrypt*",
+        "kms:GenerateDataKey*"
+       ],
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::GetAtt": [
+         "awsomefluxexampledockerpipelineawsomefluxexamplecontainerpipelineArtifactsBucketEncryptionKey9F6896D1",
+         "Arn"
+        ]
+       }
+      },
+      {
+       "Action": [
+        "kms:Decrypt",
+        "kms:Encrypt",
+        "kms:ReEncrypt*",
+        "kms:GenerateDataKey*"
+       ],
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::GetAtt": [
+         "awsomefluxexampledockerpipelineawsomefluxexamplecontainerpipelineArtifactsBucketEncryptionKey9F6896D1",
+         "Arn"
+        ]
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "awsomefluxexampledockerpipelineDockerBuildRoleDefaultPolicy9CCBA0AA",
+    "Roles": [
+     {
+      "Ref": "awsomefluxexampledockerpipelineDockerBuildRole5EFB7C4B"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "awsome-flux-example-stack/awsome-flux-example-docker-pipeline/DockerBuild/Role/DefaultPolicy/Resource"
+   }
+  },
+  "awsomefluxexampledockerpipelineDockerBuild45518260": {
+   "Type": "AWS::CodeBuild::Project",
+   "Properties": {
+    "Artifacts": {
+     "Type": "CODEPIPELINE"
+    },
+    "Environment": {
+     "ComputeType": "BUILD_GENERAL1_SMALL",
+     "EnvironmentVariables": [
+      {
+       "Name": "REPO_ECR",
+       "Type": "PLAINTEXT",
+       "Value": {
+        "Fn::Join": [
+         "",
+         [
+          {
+           "Fn::Select": [
+            4,
+            {
+             "Fn::Split": [
+              ":",
+              {
+               "Fn::GetAtt": [
+                "awsomefluxexampledockerpipelineawsomefluxexamplecontainer23E06EAE",
+                "Arn"
+               ]
+              }
+             ]
+            }
+           ]
+          },
+          ".dkr.ecr.",
+          {
+           "Fn::Select": [
+            3,
+            {
+             "Fn::Split": [
+              ":",
+              {
+               "Fn::GetAtt": [
+                "awsomefluxexampledockerpipelineawsomefluxexamplecontainer23E06EAE",
+                "Arn"
+               ]
+              }
+             ]
+            }
+           ]
+          },
+          ".",
+          {
+           "Ref": "AWS::URLSuffix"
+          },
+          "/",
+          {
+           "Ref": "awsomefluxexampledockerpipelineawsomefluxexamplecontainer23E06EAE"
+          }
+         ]
+        ]
+       }
+      }
+     ],
+     "Image": "aws/codebuild/amazonlinux2-x86_64-standard:3.0",
+     "ImagePullCredentialsType": "CODEBUILD",
+     "PrivilegedMode": true,
+     "Type": "LINUX_CONTAINER"
+    },
+    "ServiceRole": {
+     "Fn::GetAtt": [
+      "awsomefluxexampledockerpipelineDockerBuildRole5EFB7C4B",
+      "Arn"
+     ]
+    },
+    "Source": {
+     "BuildSpec": "buildspec.yml",
+     "Type": "CODEPIPELINE"
+    },
+    "Cache": {
+     "Type": "NO_CACHE"
+    },
+    "EncryptionKey": {
+     "Fn::GetAtt": [
+      "awsomefluxexampledockerpipelineawsomefluxexamplecontainerpipelineArtifactsBucketEncryptionKey9F6896D1",
+      "Arn"
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "awsome-flux-example-stack/awsome-flux-example-docker-pipeline/DockerBuild/Resource"
+   }
+  },
+  "awsomefluxexamplefluxcdawsomefluxexamplekubernetesgit42081479": {
+   "Type": "AWS::CodeCommit::Repository",
+   "Properties": {
+    "RepositoryName": "kubernetes-infra-awsome-flux-example",
+    "RepositoryDescription": "Kubernetes Infra Code"
+   },
+   "Metadata": {
+    "aws:cdk:path": "awsome-flux-example-stack/awsome-flux-example-fluxcd/awsome-flux-example-kubernetes-git/Resource"
+   }
+  },
+  "awsomefluxexamplefluxcdfluxcdmainmanifestnew79848BE6": {
+   "Type": "Custom::AWSCDK-EKS-KubernetesResource",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B",
+      "Outputs.awsomefluxexamplestackawscdkawseksKubectlProviderframeworkonEvent60B0EC45Arn"
+     ]
+    },
+    "Manifest": {
+     "Fn::Join": [
+      "",
+      [
+       "[{\"apiVersion\":\"apps/v1\",\"kind\":\"Deployment\",\"metadata\":{\"name\":\"memcached\",\"namespace\":\"default\",\"labels\":{\"aws.cdk.eks/prune-c8754faae3eee2db9a41d5af39d99d29d737c1d6ab\":\"\"}},\"spec\":{\"replicas\":1,\"selector\":{\"matchLabels\":{\"name\":\"memcached\"}},\"template\":{\"metadata\":{\"labels\":{\"name\":\"memcached\"}},\"spec\":{\"nodeSelector\":{\"beta.kubernetes.io/os\":\"linux\"},\"containers\":[{\"name\":\"memcached\",\"image\":\"memcached:1.5.20\",\"imagePullPolicy\":\"IfNotPresent\",\"args\":[\"-m 512\",\"-I 5m\",\"-p 11211\"],\"ports\":[{\"name\":\"clients\",\"containerPort\":11211}],\"securityContext\":{\"runAsUser\":11211,\"runAsGroup\":11211,\"allowPrivilegeEscalation\":false}}]}}}},{\"apiVersion\":\"v1\",\"kind\":\"Service\",\"metadata\":{\"name\":\"memcached\",\"namespace\":\"default\",\"labels\":{\"aws.cdk.eks/prune-c8754faae3eee2db9a41d5af39d99d29d737c1d6ab\":\"\"}},\"spec\":{\"ports\":[{\"name\":\"memcached\",\"port\":11211}],\"selector\":{\"name\":\"memcached\"}}},{\"apiVersion\":\"v1\",\"kind\":\"ServiceAccount\",\"metadata\":{\"labels\":{\"aws.cdk.eks/prune-c8754faae3eee2db9a41d5af39d99d29d737c1d6ab\":\"\",\"name\":\"flux\"},\"name\":\"flux\",\"namespace\":\"default\"}},{\"apiVersion\":\"rbac.authorization.k8s.io/v1beta1\",\"kind\":\"ClusterRole\",\"metadata\":{\"labels\":{\"aws.cdk.eks/prune-c8754faae3eee2db9a41d5af39d99d29d737c1d6ab\":\"\",\"name\":\"flux\"},\"name\":\"flux\"},\"rules\":[{\"apiGroups\":[\"*\"],\"resources\":[\"*\"],\"verbs\":[\"*\"]},{\"nonResourceURLs\":[\"*\"],\"verbs\":[\"*\"]}]},{\"apiVersion\":\"rbac.authorization.k8s.io/v1beta1\",\"kind\":\"ClusterRoleBinding\",\"metadata\":{\"labels\":{\"aws.cdk.eks/prune-c8754faae3eee2db9a41d5af39d99d29d737c1d6ab\":\"\",\"name\":\"flux\"},\"name\":\"flux\"},\"roleRef\":{\"apiGroup\":\"rbac.authorization.k8s.io\",\"kind\":\"ClusterRole\",\"name\":\"flux\"},\"subjects\":[{\"kind\":\"ServiceAccount\",\"name\":\"flux\",\"namespace\":\"default\"}]},{\"apiVersion\":\"apps/v1\",\"kind\":\"Deployment\",\"metadata\":{\"name\":\"flux\",\"namespace\":\"default\",\"labels\":{\"aws.cdk.eks/prune-c8754faae3eee2db9a41d5af39d99d29d737c1d6ab\":\"\"}},\"spec\":{\"replicas\":1,\"selector\":{\"matchLabels\":{\"name\":\"flux\"}},\"strategy\":{\"type\":\"Recreate\"},\"template\":{\"metadata\":{\"annotations\":{\"prometheus.io/port\":\"3031\"},\"labels\":{\"name\":\"flux\"}},\"spec\":{\"nodeSelector\":{\"beta.kubernetes.io/os\":\"linux\"},\"serviceAccountName\":\"flux\",\"volumes\":[{\"name\":\"git-key\",\"secret\":{\"secretName\":\"flux-git-deploy\",\"defaultMode\":256}},{\"name\":\"git-keygen\",\"emptyDir\":{\"medium\":\"Memory\"}}],\"containers\":[{\"name\":\"flux\",\"image\":\"docker.io/fluxcd/flux:1.21.0\",\"imagePullPolicy\":\"IfNotPresent\",\"envFrom\":[{\"secretRef\":{\"name\":\"flux-git-auth\"}}],\"resources\":{\"requests\":{\"cpu\":\"50m\",\"memory\":\"64Mi\"}},\"ports\":[{\"containerPort\":3030}],\"livenessProbe\":{\"httpGet\":{\"port\":3030,\"path\":\"/api/flux/v6/identity.pub\"},\"initialDelaySeconds\":5,\"timeoutSeconds\":5},\"readinessProbe\":{\"httpGet\":{\"port\":3030,\"path\":\"/api/flux/v6/identity.pub\"},\"initialDelaySeconds\":5,\"timeoutSeconds\":5},\"volumeMounts\":[{\"name\":\"git-key\",\"mountPath\":\"/etc/fluxd/ssh\",\"readOnly\":true},{\"name\":\"git-keygen\",\"mountPath\":\"/var/fluxd/keygen\"}],\"args\":[\"--memcached-service=\",\"--ssh-keygen-dir=/var/fluxd/keygen\",\"--git-url=https://$(GIT_AUTHUSER):$(GIT_AUTHKEY)@git-codecommit.us-east-2.amazonaws.com/v1/repos/",
+       {
+        "Fn::GetAtt": [
+         "awsomefluxexamplefluxcdawsomefluxexamplekubernetesgit42081479",
+         "Name"
+        ]
+       },
+       "\",\"--git-branch=master\",\"--git-label=flux\",\"--git-email=aws-example@users.noreply.github.com\",\"--listen-metrics=:3031\"]}]}}}},{\"apiVersion\":\"v1\",\"kind\":\"Secret\",\"metadata\":{\"name\":\"flux-git-deploy\",\"namespace\":\"default\",\"labels\":{\"aws.cdk.eks/prune-c8754faae3eee2db9a41d5af39d99d29d737c1d6ab\":\"\"}},\"type\":\"Opaque\"},{\"apiVersion\":\"v1\",\"kind\":\"Secret\",\"metadata\":{\"name\":\"flux-git-auth\",\"namespace\":\"default\",\"labels\":{\"aws.cdk.eks/prune-c8754faae3eee2db9a41d5af39d99d29d737c1d6ab\":\"\"}},\"data\":{\"GIT_AUTHKEY\":\"eXpzSnVXVEhrZEUwQUlKRHpKcmZiQlBRVTFZdnBBRVFGVVhmdktnM0FOVT0=\",\"GIT_AUTHUSER\":\"Y29kZWNvbW1pdC1hdC05NjU3MjI2NjYzNDQ=\"},\"type\":\"Opaque\"}]"
+      ]
+     ]
+    },
+    "ClusterName": {
+     "Ref": "awsomefluxexamplecluster7E1AB52B"
+    },
+    "RoleArn": {
+     "Fn::GetAtt": [
+      "awsomefluxexampleclusterCreationRoleEEC56F7E",
+      "Arn"
+     ]
+    },
+    "PruneLabel": "aws.cdk.eks/prune-c8754faae3eee2db9a41d5af39d99d29d737c1d6ab"
+   },
+   "DependsOn": [
+    "awsomefluxexampleclusterKubectlReadyBarrier0DA318A6"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "awsome-flux-example-stack/awsome-flux-example-fluxcd/fluxcd-main-manifest-new/Resource/Default"
+   }
+  },
+  "CDKMetadata": {
+   "Type": "AWS::CDK::Metadata",
+   "Properties": {
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/31Sy27CMBD8Fu7GLXBorymqEEJto1BxrRyzlCWJHdlrEIry73XsgNtLTzsz2ddsPOeLZz6biIudyn01rbHk3ZaErJiXvjqoLO+WtbMEhmUXmzk6so0rwSggsG9C4QEssXe9h2+jXcuWB3UnPQM5592ulYO8y5csd2WNcutKXz5oCRXaEXyKsoakJy2zVksUhFrdkwfwus7DREErQXARV5YbPHuYGq8VhW1vCXGTkWXkvR4bUMS2IJ1Buq5uNv4IPUPR8K7Qcb8Qc+29hIYRDXaNz4FWWyRtwqfEeib9YaRuGqT/suDs1/FnL9w4y8dY22ILNSrgXT6iMHzEPasaX7aB0HEIWY3CDiSAntkF716crOJhRhRD8vKbx7Glw3qfZuZGn0CGFiPse1aA1c5Iv5B/K7pJdPCW8Iej1sU/PzyynuVXOmr1sOBPfPY4OVnEqXGKsAFexPgDmqBUJaICAAA="
+   },
+   "Metadata": {
+    "aws:cdk:path": "awsome-flux-example-stack/CDKMetadata/Default"
+   }
+  }
+ },
+ "Outputs": {
+  "awsomefluxexampleclusterConfigCommandC5ACCB2F": {
+   "Value": {
+    "Fn::Join": [
+     "",
+     [
+      "aws eks update-kubeconfig --name ",
+      {
+       "Ref": "awsomefluxexamplecluster7E1AB52B"
+      },
+      " --region us-east-2 --role-arn ",
+      {
+       "Fn::GetAtt": [
+        "awsomefluxexampleclusterMastersRole1B1D2CE8",
+        "Arn"
+       ]
+      }
+     ]
+    ]
+   }
+  },
+  "awsomefluxexampleclusterGetTokenCommand58A55459": {
+   "Value": {
+    "Fn::Join": [
+     "",
+     [
+      "aws eks get-token --cluster-name ",
+      {
+       "Ref": "awsomefluxexamplecluster7E1AB52B"
+      },
+      " --region us-east-2 --role-arn ",
+      {
+       "Fn::GetAtt": [
+        "awsomefluxexampleclusterMastersRole1B1D2CE8",
+        "Arn"
+       ]
+      }
+     ]
+    ]
+   }
+  },
+  "awsomefluxexampledockerpipelineapplicationrepositoryF0BB24A0": {
+   "Value": {
+    "Fn::GetAtt": [
+     "awsomefluxexampledockerpipelineawsomefluxexamplecontainergitBF92E00C",
+     "CloneUrlHttp"
+    ]
+   }
+  },
+  "awsomefluxexamplefluxcdk8sinfrastructurerepository051BF5A3": {
+   "Value": {
+    "Fn::GetAtt": [
+     "awsomefluxexamplefluxcdawsomefluxexamplekubernetesgit42081479",
+     "CloneUrlHttp"
+    ]
+   }
+  }
+ },
+ "Parameters": {
+  "BootstrapVersion": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "/cdk-bootstrap/hnb659fds/version",
+   "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]"
+  }
+ },
+ "Rules": {
+  "CheckBootstrapVersion": {
+   "Assertions": [
+    {
+     "Assert": {
+      "Fn::Not": [
+       {
+        "Fn::Contains": [
+         [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+         ],
+         {
+          "Ref": "BootstrapVersion"
+         }
+        ]
+       }
+      ]
+     },
+     "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI."
+    }
+   ]
+  }
+ }
+}

@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
-from aws_cdk import core
+#from aws_cdk import core
+import aws_cdk as core
 from dockerpipeline.docker_pipeline import DockerPipelineConstruct
 from fluxcd.fluxcd_construct import FluxcdConstruct
 from cluster.cluster_construct import ClusterConstruct
